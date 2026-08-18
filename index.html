@@ -1175,98 +1175,67 @@
     <footer class="footerLite" id="footer">
       <div class="wrap footerLite__inner">
         <div class="footerLite__top">
-          <!-- Quick Links -->
-          <nav class="fL_col" aria-label="Linkovi" data-reveal="card">
-            <div class="fL_title">Navigacija</div>
-            <a href="#why-us" data-scroll>
-              <span>→</span>
-              <span>Zašto mi</span>
-            </a>
-            <a href="#services" data-scroll>
-              <span>→</span>
-              <span>Usluge</span>
-            </a>
-            <a href="#process" data-scroll>
-              <span>→</span>
-              <span>Proces</span>
-            </a>
-            <a href="#location" data-scroll>
-              <span>→</span>
-              <span>Lokacija</span>
-            </a>
-            <a href="#partners" data-scroll>
-              <span>→</span>
-              <span>Partneri</span>
-            </a>
+          
+          <!-- Column 1: Brand/About -->
+          <div class="fL_col fL_col--brand" data-reveal="card">
+            <img src="img/logo2.webp" alt="VR46 Tehnički Pregled" class="fL_logoImg" width="130" height="auto" loading="lazy">
+            <p class="fL_brandText">Profesionalni tehnički pregled i registracija vozila. Pouzdano, brzo i na jednom mestu.</p>
+            <div class="fL_socialIcons">
+              <a href="https://www.instagram.com/vr46_tehnickipregled/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.tiktok.com/@vr46_tehnickipregled" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" /></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Column 2: Navigation -->
+          <nav class="fL_col fL_col--nav" aria-label="Brzi linkovi" data-reveal="card">
+            <h4 class="fL_colTitle">Navigacija</h4>
+            <a href="#why-us" class="fL_link" data-scroll>Zašto mi</a>
+            <a href="#services" class="fL_link" data-scroll>Naše usluge</a>
+            <a href="#process" class="fL_link" data-scroll>Proces registracije</a>
+            <a href="#location" class="fL_link" data-scroll>Lokacija</a>
+            <a href="#partners" class="fL_link" data-scroll>Partneri</a>
           </nav>
 
-          <!-- Contact Info -->
+          <!-- Column 3: Contact Info -->
           <div class="fL_col fL_col--contact" data-reveal="card">
-            <div class="fL_title">Kontakt</div>
-
-            <div class="fL_contact">
-              <div class="fL_cItem">
-                <span class="fL_cLabel">Telefon</span>
-                <a href="tel:+381637502340" class="fL_cVal">+381 63 750 2340</a>
-              </div>
-
-              <div class="fL_cItem">
-                <span class="fL_cLabel">E-mail</span>
-                <a href="mailto:info@vr46.rs" class="fL_cVal">info@vr46.rs</a>
-              </div>
-
-              <div class="fL_cItem">
-                <span class="fL_cLabel">Adresa</span>
-                <span class="fL_cVal">Patrijarha Joanikija 3a, Beograd</span>
-              </div>
+            <h4 class="fL_colTitle">Kontakt</h4>
+            <div class="fL_cItem">
+              <span class="fL_cLabel">Telefon</span>
+              <a href="tel:+381637502340" class="fL_cValue">+381 63 750 2340</a>
+            </div>
+            <div class="fL_cItem">
+              <span class="fL_cLabel">E-mail adresa</span>
+              <a href="mailto:info@vr46.rs" class="fL_cValue">info@vr46.rs</a>
+            </div>
+            <div class="fL_cItem">
+              <span class="fL_cLabel">Adresa lokacije</span>
+              <span class="fL_cValue">Patrijarha Joanikija 3a, Beograd</span>
             </div>
           </div>
 
-          <!-- Working Hours -->
+          <!-- Column 4: Working Hours -->
           <div class="fL_col fL_col--hours" data-reveal="card">
-            <div class="fL_title">Radno vreme</div>
-
-            <div class="fL_hours">
-              <div class="fL_hRow">
-                <span>Ponedeljak – Petak</span>
-                <b>07:00 – 21:00</b>
-              </div>
-              <div class="fL_hRow">
-                <span>Subota</span>
-                <b>08:00 – 14:00</b>
-              </div>
-              <div class="fL_hRow fL_hRow--closed">
-                <span>Nedelja</span>
-                <b>Zatvoreno</b>
-              </div>
-            </div>
-
-            <!-- Social Media -->
-            <div class="fL_social">
-              <div class="fL_title fL_title--spaced">Pratite nas</div>
-              <div class="fL_socialIcons">
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/vr46_tehnickipregled/" target="_blank" rel="noopener noreferrer"
-                  class="fL_socialIcon" aria-label="VR46 Instagram">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                  </svg>
-                </a>
-
-                <!-- TikTok -->
-                <a href="https://www.tiktok.com/@vr46_tehnickipregled" target="_blank" rel="noopener noreferrer"
-                  class="fL_socialIcon" aria-label="VR46 TikTok">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                      d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                  </svg>
-                </a>
-              </div>
-            </div>
+            <h4 class="fL_colTitle">Radno vreme</h4>
+            <ul class="fL_hoursList">
+              <li>
+                <span class="fL_day">Ponedeljak – Petak</span>
+                <span class="fL_time">07:00 – 21:00</span>
+              </li>
+              <li>
+                <span class="fL_day">Subota</span>
+                <span class="fL_time">08:00 – 14:00</span>
+              </li>
+              <li class="is-closed">
+                <span class="fL_day">Nedelja</span>
+                <span class="fL_time">Zatvoreno</span>
+              </li>
+            </ul>
           </div>
+          
         </div>
 
         <!-- Bottom Footer -->

@@ -9000,6 +9000,176 @@ body .topbar.is-solid .topbar__cta .btn:hover {
     font-size: 16.5px !important;
     line-height: 1.55 !important;
   }
+  
+  /* Optimizacija visine hero sekcije za telefone (sprecava deformaciju slika) */
+  .heroStage {
+    min-height: 70vh !important;
+    height: auto !important;
+    padding-top: 60px !important;
+    padding-bottom: 40px !important;
+  }
+  .heroSlides__img {
+    object-position: center 30% !important; /* Fokusira sliku malo vise ka vrhu gde je akcija */
+  }
+}
+
+/* ===== CLEAN PROFESSIONAL FOOTER REDESIGN ===== */
+.footerLite__top {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr 1.5fr 1.5fr !important;
+  gap: 40px !important;
+  padding-bottom: 50px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 30px;
+}
+
+@media (max-width: 992px) {
+  .footerLite__top {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px 30px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .footerLite__top {
+    grid-template-columns: 1fr !important;
+    gap: 35px !important;
+  }
+}
+
+.fL_col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fL_col--brand {
+  padding-right: 20px;
+}
+
+.fL_logoImg {
+  display: block;
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+.fL_brandText {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  margin: 0 0 24px 0;
+}
+
+.fL_socialIcons {
+  display: flex;
+  gap: 16px;
+}
+
+.fL_socialIcons a {
+  display: inline-flex;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.25s ease;
+}
+
+.fL_socialIcons a svg {
+  width: 20px;
+  height: 20px;
+}
+
+.fL_socialIcons a:hover {
+  color: #fff;
+}
+
+.fL_colTitle {
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  margin: 0 0 24px 0;
+}
+
+.fL_link {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  font-size: 15px;
+  margin-bottom: 14px;
+  transition: color 0.25s ease;
+  width: fit-content;
+  display: block;
+}
+
+.fL_link:last-child {
+  margin-bottom: 0;
+}
+
+.fL_link:hover {
+  color: #fff;
+}
+
+.fL_cItem {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+.fL_cItem:last-child {
+  margin-bottom: 0;
+}
+
+.fL_cLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 4px;
+}
+
+.fL_cValue {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.25s ease;
+  text-decoration: none;
+}
+
+a.fL_cValue:hover {
+  color: #fff;
+}
+
+.fL_hoursList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fL_hoursList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fL_hoursList li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.fL_day {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.fL_time {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+.fL_hoursList li.is-closed .fL_time {
+  color: rgba(255, 255, 255, 0.35);
 }
 
 
