@@ -8962,9 +8962,6 @@ body .topbar.is-solid .topbar__cta .btn:hover {
 }
 
 /* ===== PROGRESS BAR FIX & REVEAL ANIMATIONS ON MOBILE ===== */
-.topbar {
-  position: relative !important;
-}
 .navProgress {
   position: absolute !important;
   bottom: 0 !important;
@@ -8986,6 +8983,22 @@ body .topbar.is-solid .topbar__cta .btn:hover {
     transform: translateY(15px) !important;
     filter: none !important;
     transition: opacity 0.6s cubic-bezier(0.2, 1, 0.3, 1), transform 0.6s cubic-bezier(0.2, 1, 0.3, 1) !important;
+  }
+  
+  /* Smanjenje zutog overlaya na pozadini za telefon */
+  .heroSlides__overlay {
+    background:
+      linear-gradient(90deg, rgba(11, 11, 11, .85) 0%, rgba(11, 11, 11, .35) 55%, rgba(11, 11, 11, .80) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, .20), rgba(0, 0, 0, .60)) !important;
+  }
+
+  /* Povecanje teksta na telefonu za jasniju citljivost */
+  body {
+    font-size: 16px !important;
+  }
+  p, .desc, .text, .whyCard__text, .svcCard__desc, .faqCard__a, .processCard__text, .fL_brandDesc, .mnav__link, .navComic {
+    font-size: 16.5px !important;
+    line-height: 1.55 !important;
   }
 }
 
