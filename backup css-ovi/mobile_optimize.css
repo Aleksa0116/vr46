@@ -1,0 +1,418 @@
+/* ===== MOBILE OPTIMIZATION & RESPONSIVE DESIGN ===== */
+/* Mobile-first approach optimized for phone traffic */
+
+/* ===== TABLET & SMALL DESKTOP (max-width: 1024px) ===== */
+@media (max-width: 1024px) {
+
+    /* Reduce complex animations */
+    * {
+        animation-duration: 0.3s !important;
+    }
+
+    /* Simplify shadows */
+    .partnerCard,
+    .serviceCard,
+    .processStep {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+    }
+}
+
+/* ===== MOBILE DEVICES (max-width: 768px) ===== */
+@media (max-width: 768px) {
+    /* ===== GLOBAL OPTIMIZATIONS ===== */
+
+    /* Remove heavy effects for performance */
+    *::before,
+    *::after {
+        animation: none !important;
+        will-change: auto !important;
+    }
+
+    /* Disable complex transforms on mobile */
+    .hero46,
+    .ambient-glow,
+    .glow-effect {
+        animation: none !important;
+        transform: none !important;
+    }
+
+    /* Simplified shadows for better performance */
+    * {
+        box-shadow: none !important;
+    }
+
+    /* Keep only essential shadows */
+    .topbar,
+    .partnerCard,
+    .serviceCard,
+    .btn,
+    .fL_socialIcon {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* ===== TYPOGRAPHY OPTIMIZATIONS ===== */
+
+    /* Better readability on mobile */
+    body {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+    }
+
+    h1,
+    .h1 {
+        font-size: 32px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 20px !important;
+    }
+
+    h2,
+    .h2 {
+        font-size: 28px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 16px !important;
+    }
+
+    h3,
+    .h3 {
+        font-size: 22px !important;
+        line-height: 1.3 !important;
+        margin-bottom: 12px !important;
+    }
+
+    p {
+        font-size: 15px !important;
+        line-height: 1.65 !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* ===== TOUCH TARGET OPTIMIZATION ===== */
+
+    /* Minimum 44px touch targets */
+    a,
+    button,
+    .btn,
+    input,
+    select,
+    textarea {
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+
+    /* Simplified hover states for touch devices */
+    a:hover,
+    button:hover,
+    .btn:hover {
+        transform: none !important;
+    }
+
+    /* ===== NAVBAR MOBILE ===== */
+
+    .topbar {
+        padding: 12px 0 !important;
+    }
+
+    .topbar__logo {
+        font-size: 20px !important;
+    }
+
+    /* CTA buttons optimized for mobile */
+    .topbar__cta .btn {
+        padding: 10px 16px !important;
+        font-size: 14px !important;
+        min-height: 44px !important;
+    }
+
+    /* Remove complex navbar effects */
+    .topbar.is-solid::before {
+        display: none !important;
+    }
+
+    /* ===== HERO SECTION MOBILE ===== */
+
+    .hero {
+        min-height: 80vh !important;
+        padding: 60px 0 40px !important;
+    }
+
+    .hero__title {
+        font-size: 36px !important;
+        line-height: 1.2 !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .hero__subtitle {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+    }
+
+    /* Simplified hero slides */
+    .heroSlides__img {
+        filter: brightness(0.6) !important;
+    }
+
+    /* ===== PARTNER CARDS MOBILE ===== */
+
+    .partnersGrid {
+        gap: 24px !important;
+        margin-top: 32px !important;
+    }
+
+    .partnerCard {
+        min-height: 380px !important;
+        border-radius: 16px !important;
+    }
+
+    /* Remove complex gradients */
+    .partnerCard::before,
+    .partnerCard::after {
+        display: none !important;
+    }
+
+    /* Simplified background */
+    .partnerCard__img::before {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8)) !important;
+    }
+
+    /* Remove hover effects on mobile (tap-based) */
+    .partnerCard:hover {
+        transform: none !important;
+        border-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .partnerCard:hover .partnerCard__img img {
+        transform: none !important;
+    }
+
+    /* Better text readability */
+    .partnerCard__content {
+        padding: 24px 20px 20px !important;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.92)) !important;
+    }
+
+    .partnerCard__title {
+        font-size: 24px !important;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    .partnerCard__desc {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        color: rgba(255, 255, 255, 0.9) !important;
+    }
+
+    .partnerCard__badge {
+        font-size: 10px !important;
+        padding: 6px 14px !important;
+    }
+
+    /* ===== FOOTER MOBILE ===== */
+
+    .footerLite__top {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+        padding: 50px 0 32px !important;
+    }
+
+    .fL_title {
+        font-size: 13px !important;
+        margin-bottom: 16px !important;
+    }
+
+    /* Navigation links */
+    .fL_col a {
+        font-size: 16px !important;
+        padding: 8px 0 !important;
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* Contact items */
+    .fL_cVal {
+        font-size: 16px !important;
+    }
+
+    /* Working hours */
+    .fL_hRow {
+        padding: 12px 0 !important;
+    }
+
+    .fL_hRow span,
+    .fL_hRow b {
+        font-size: 15px !important;
+    }
+
+    /* Social icons - optimized for touch */
+    .fL_socialIcons {
+        gap: 16px !important;
+        margin-top: 8px !important;
+    }
+
+    .fL_socialIcon {
+        width: 52px !important;
+        height: 52px !important;
+        border-radius: 14px !important;
+    }
+
+    .fL_socialIcon svg {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    /* Remove hover effects on mobile */
+    .fL_socialIcon:hover {
+        transform: none !important;
+        background: rgba(255, 255, 255, 0.04) !important;
+        border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    .fL_socialIcon:active {
+        transform: scale(0.95) !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* Footer bottom */
+    .footerLite__bottom {
+        flex-direction: column !important;
+        gap: 24px !important;
+        text-align: center !important;
+        padding: 24px 0 !important;
+    }
+
+    .fL_legal {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+    }
+
+    .fL_certifications {
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .fL_cert {
+        justify-content: center !important;
+        font-size: 13px !important;
+    }
+
+    .fL_top {
+        padding: 14px 24px !important;
+        font-size: 14px !important;
+        min-height: 48px !important;
+    }
+
+    /* ===== SECTIONS SPACING ===== */
+
+    .section {
+        padding: 60px 0 !important;
+    }
+
+    .wrap {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    /* ===== BUTTONS MOBILE ===== */
+
+    .btn {
+        padding: 14px 24px !important;
+        font-size: 15px !important;
+        border-radius: 10px !important;
+        min-height: 48px !important;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px) !important;
+    }
+
+    .btn:active {
+        transform: translateY(0) !important;
+    }
+
+    /* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+    /* Disable will-change on mobile for better performance */
+    * {
+        will-change: auto !important;
+    }
+
+    /* Simplified transitions */
+    * {
+        transition-duration: 0.2s !important;
+    }
+
+    /* Reduce motion for better battery life */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+}
+
+/* ===== SMALL MOBILE (max-width: 480px) ===== */
+@media (max-width: 480px) {
+    /* Ultra-optimized for small screens */
+
+    body {
+        font-size: 15px !important;
+    }
+
+    h1,
+    .h1 {
+        font-size: 28px !important;
+    }
+
+    h2,
+    .h2 {
+        font-size: 24px !important;
+    }
+
+    h3,
+    .h3 {
+        font-size: 20px !important;
+    }
+
+    .hero__title {
+        font-size: 32px !important;
+    }
+
+    .partnerCard {
+        min-height: 350px !important;
+    }
+
+    .partnerCard__title {
+        font-size: 22px !important;
+    }
+
+    .partnerCard__desc {
+        font-size: 13px !important;
+    }
+
+    .section {
+        padding: 50px 0 !important;
+    }
+
+    .wrap {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    /* Social icons slightly smaller on very small screens */
+    .fL_socialIcon {
+        width: 48px !important;
+        height: 48px !important;
+    }
+}
+
+/* ===== LANDSCAPE MOBILE (max-height: 500px) ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh !important;
+    }
+
+    .hero__title {
+        font-size: 28px !important;
+    }
+}

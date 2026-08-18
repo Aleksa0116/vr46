@@ -1,0 +1,334 @@
+/* ===== FOOTER REDESIGN - MODERN & CLEAN ===== */
+
+/* Footer Grid Layout */
+.footerLite__top {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 60px !important;
+    padding: 80px 0 60px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Column Styling */
+.fL_col {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+}
+
+.fL_title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    margin-bottom: 8px !important;
+}
+
+/* Navigation Links */
+.fL_col a {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.75) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    padding: 4px 0 !important;
+}
+
+.fL_col a span:first-child {
+    color: var(--yellow) !important;
+    font-size: 14px !important;
+    opacity: 0 !important;
+    transform: translateX(-8px) !important;
+    transition: all 0.3s ease !important;
+}
+
+.fL_col a:hover {
+    color: #fff !important;
+    transform: translateX(4px) !important;
+}
+
+.fL_col a:hover span:first-child {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+/* Contact Items */
+.fL_contact {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+}
+
+.fL_cItem {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+}
+
+.fL_cLabel {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.fL_cVal {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease !important;
+}
+
+.fL_cVal:hover {
+    color: var(--yellow) !important;
+}
+
+/* Working Hours */
+.fL_hours {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    margin-top: 8px !important;
+}
+
+.fL_hRow {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.fL_hRow span {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.fL_hRow b {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.fL_hRow--closed {
+    opacity: 0.5 !important;
+}
+
+/* Social Media - Premium Icon Design */
+.fL_social {
+    margin-top: 12px !important;
+}
+
+.fL_socialIcons {
+    display: flex !important;
+    gap: 12px !important;
+}
+
+.fL_socialIcon {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 48px !important;
+    height: 48px !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 12px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-decoration: none !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    overflow: visible !important;
+}
+
+/* Subtle shine effect */
+.fL_socialIcon::before {
+    content: '' !important;
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%) !important;
+    border-radius: 12px !important;
+    opacity: 0 !important;
+    transition: opacity 0.4s ease !important;
+}
+
+.fL_socialIcon svg {
+    position: relative !important;
+    z-index: 1 !important;
+    width: 22px !important;
+    height: 22px !important;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.fL_socialIcon:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+    transform: translateY(-6px) scale(1.05) !important;
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.5),
+        0 6px 12px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+}
+
+.fL_socialIcon:hover::before {
+    opacity: 1 !important;
+}
+
+.fL_socialIcon:hover svg {
+    transform: scale(1.12) rotate(-2deg) !important;
+}
+
+.fL_socialIcon:active {
+    transform: translateY(-3px) scale(1.02) !important;
+    transition: all 0.1s ease !important;
+}
+
+
+
+/* Bottom Footer */
+.footerLite__bottom {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 32px 0 !important;
+}
+
+.fL_legal {
+    display: flex !important;
+    align-items: center !important;
+    gap: 32px !important;
+}
+
+.fL_copyright {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+}
+
+.fL_year {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.fL_rights {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.fL_certifications {
+    display: flex !important;
+    gap: 24px !important;
+}
+
+.fL_cert {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    padding: 8px 14px !important;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-radius: 6px !important;
+}
+
+.fL_cert svg {
+    width: 16px !important;
+    height: 16px !important;
+    stroke: var(--yellow) !important;
+}
+
+/* Back to Top Button */
+.fL_top {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 12px 20px !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.fL_topIcon {
+    font-size: 18px !important;
+    color: var(--yellow) !important;
+}
+
+.fL_top:hover {
+    background: rgba(216, 249, 22, 0.08) !important;
+    border-color: rgba(216, 249, 22, 0.3) !important;
+    color: var(--yellow) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .footerLite__top {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 40px !important;
+    }
+
+    .fL_col:last-child {
+        grid-column: 1 / -1 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .footerLite__top {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        padding: 60px 0 40px !important;
+    }
+
+    .footerLite__bottom {
+        flex-direction: column !important;
+        gap: 24px !important;
+        text-align: center !important;
+    }
+
+    .fL_legal {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    .fL_certifications {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .fL_certifications {
+        width: 100% !important;
+    }
+
+    .fL_cert {
+        justify-content: center !important;
+    }
+}
