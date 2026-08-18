@@ -577,6 +577,7 @@
         // 5. Menu
         if (navbtn && mnav) navbtn.addEventListener('click', toggleMenu);
         overlay?.addEventListener('click', closeMenu);
+        mnav?.addEventListener('click', (e) => { if (e.target === mnav) closeMenu(); });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && document.body.classList.contains('menu-open')) closeMenu();
         });

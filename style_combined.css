@@ -1,4 +1,4 @@
-﻿/* ===== TOKENS / VARS ===== */
+/* ===== TOKENS / VARS ===== */
 :root {
   --bg: #0b0b0b;
   --pageBase: #070707;
@@ -8912,6 +8912,53 @@ button.map__cta svg {
 .brand__logo {
   transform: scale(1.35) !important;
   transform-origin: left center !important;
+}
+
+/* ===== MOBILE & UI FIXES ===== */
+@media (max-width: 992px) {
+  /* 1. Mobile Menu CTA Color */
+  .mnav__actions .btn {
+    color: #000 !important;
+  }
+  
+  /* 3. Mobile Marquee Speed */
+  .marquee__track {
+    animation-duration: 35s !important; 
+  }
+  
+  /* 5. Hero title on mobile (VR46 TEHNIČKI PREGLED) */
+  .heroFocus__title {
+    font-size: clamp(3rem, 12vw, 4rem) !important;
+    line-height: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0 !important;
+  }
+  .heroFocus__title .d-block {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  .heroFocus__title .d-block:first-child {
+    margin-bottom: 5px !important;
+  }
+  .heroFocus__title .text-outline {
+    -webkit-text-stroke: 1px #fff !important;
+  }
+}
+
+/* 4. Navbar CTA button on scroll */
+body .topbar.is-solid .topbar__cta .btn {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
+}
+body .topbar.is-solid .topbar__cta .btn:hover {
+  background: var(--yellow) !important;
+  border-color: var(--yellow) !important;
+  color: #000 !important;
 }
 
 
