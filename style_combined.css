@@ -8961,5 +8961,33 @@ body .topbar.is-solid .topbar__cta .btn:hover {
   color: #000 !important;
 }
 
+/* ===== PROGRESS BAR FIX & REVEAL ANIMATIONS ON MOBILE ===== */
+.topbar {
+  position: relative !important;
+}
+.navProgress {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 920px) {
+  .topbar {
+    padding-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Fix za spore animacije i nedostatak fade efekta na telefonu */
+  .reveal,
+  [data-reveal] {
+    transform: translateY(15px) !important;
+    filter: none !important;
+    transition: opacity 0.6s cubic-bezier(0.2, 1, 0.3, 1), transform 0.6s cubic-bezier(0.2, 1, 0.3, 1) !important;
+  }
+}
+
 
 
