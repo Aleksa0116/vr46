@@ -559,13 +559,31 @@ body.menu-open main {
 }
 
 @media (max-width: 768px) {
-  .heroStage { min-height: 78svh; }
-  .heroFocus { text-align: center; padding-bottom: 56px; }
+  .heroStage { min-height: 70svh; }
+  .heroFocus {
+    text-align: center;
+    padding: calc(var(--topbarH) + 36px) 0 44px;
+  }
   .heroFocus__content { margin: 0 auto; }
-  .heroFocus__actions { justify-content: center; }
-  .heroFocus__title { font-size: clamp(40px, 14vw, 64px); }
+  .heroFocus__kicker,
+  .heroFocus__sub,
+  .heroFocus__meta { display: none; }
+  .heroFocus__title { font-size: clamp(36px, 12vw, 54px); }
   .heroFocus__title .text-outline { -webkit-text-stroke: 1.5px #fff; }
-  .hero46 { font-size: 240px; right: -50px; bottom: -80px; }
+  .heroFocus__actions {
+    justify-content: center;
+    margin-top: 22px;
+  }
+  .heroFocus__actions .btn--outline { display: none; }
+  .heroFocus__actions .btn {
+    width: min(100%, 320px);
+  }
+  .hero46 {
+    font-size: 170px;
+    right: -36px;
+    bottom: -64px;
+    color: rgba(216, 249, 22, .05);
+  }
 }
 
 /* ===== FACTS BAR ===== */
@@ -1499,5 +1517,4 @@ a.fL_cValue:hover { color: var(--yellow); }
 
 @media (max-width: 768px) {
   .section { padding: 56px 0; }
-  .heroFocus__actions .btn { width: 100%; }
 }
