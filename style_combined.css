@@ -570,7 +570,9 @@ body.menu-open .scrollTop {
 }
 
 @media (max-width: 768px) {
-  .heroStage { min-height: auto; }
+  .heroStage {
+    min-height: calc(100svh - 44px);
+  }
   .heroFocus {
     text-align: center;
     padding: calc(var(--topbarH) + 28px) 0 40px;
