@@ -388,11 +388,24 @@ body.menu-open main {
     font-weight: 600;
   }
   .mnav .navComic {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: .02em;
-    gap: 0;
+    font-family: "Luckiest Guy", system-ui, sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    gap: 3.5px;
   }
+  .mnav .navComic .ch {
+    color: var(--fill, #fff) !important;
+    -webkit-text-fill-color: var(--fill, #fff) !important;
+    -webkit-text-stroke: 1.4px rgba(0, 0, 0, .95);
+    paint-order: stroke fill;
+    text-shadow:
+      1px 1px 0 rgba(0, 0, 0, .85),
+      2px 2px 0 rgba(0, 0, 0, .45);
+    transform: scaleX(1.12);
+  }
+  .mnav .navComic .sp { width: 10px; }
   .mnav__foot { padding: 8px 12px 0; }
   .mnav__foot .btn { width: 100%; }
 }
