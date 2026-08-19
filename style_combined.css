@@ -1552,7 +1552,7 @@ a.fL_cValue:hover { color: var(--yellow); }
 @media (max-width: 920px) {
   .scrollTop {
     right: 16px;
-    bottom: calc(128px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(156px + env(safe-area-inset-bottom, 0px));
   }
 }
 
