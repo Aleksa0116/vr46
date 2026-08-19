@@ -8,11 +8,6 @@
     const overlay = qs('[data-overlay]');
     const prog = qs('.navProgress span');
 
-    // =====================================================================
-    // UNIFIED SCROLL LOOP
-    // Single RAF callback — one layout read per frame, zero redundant style
-    // recalculations. All scroll-driven work registered here.
-    // =====================================================================
     let _rafPending = false;
     let _scrollY = window.scrollY;
     const _scrollTasks = [];
@@ -27,17 +22,12 @@
     function _runScrollTasks() {
         _rafPending = false;
         const y = _scrollY;
-        for (let i = 0; i < _scrollTasks.length; i++) {
-            _scrollTasks[i](y);
-        }
+        for (let i = 0; i < _scrollTasks.length; i++) _scrollTasks[i](y);
     }
 
     function addScrollTask(fn) { _scrollTasks.push(fn); }
-
     window.addEventListener('scroll', _onScroll, { passive: true });
 
-    // ===== TOPBAR =====
-    // Only touch classList — no layout reads, no style recalcs
     let _lastSolid = null;
     let _lastAtTop = null;
 
@@ -45,7 +35,6 @@
         if (!header) return;
         const atTop = y <= 2;
         const solid = document.body.classList.contains('menu-open') || y > 12;
-
         if (atTop !== _lastAtTop) {
             header.classList.toggle('is-top', atTop);
             _lastAtTop = atTop;
@@ -56,37 +45,34 @@
         }
     }
 
-    // ===== TOPBAR HEIGHT SYNC =====
-    // Syncs --topbarH CSS var once on load and on resize (debounced).
-    // Uses ResizeObserver on the header itself for accuracy.
     function syncTopbarH() {
         if (!header) return;
         const h = Math.round(header.getBoundingClientRect().height);
         document.documentElement.style.setProperty('--topbarH', h + 'px');
     }
 
-    // ===== Mobile menu =====
     function closeMenu() {
         document.body.classList.remove('menu-open');
         navbtn?.setAttribute('aria-expanded', 'false');
         mnav?.setAttribute('aria-hidden', 'true');
         overlay?.setAttribute('aria-hidden', 'true');
-        _lastSolid = null; // force re-eval
+        _lastSolid = null;
         setHeader(window.scrollY);
     }
+
     function openMenu() {
         document.body.classList.add('menu-open');
         navbtn?.setAttribute('aria-expanded', 'true');
         mnav?.setAttribute('aria-hidden', 'false');
         overlay?.setAttribute('aria-hidden', 'false');
-        _lastSolid = null; // force re-eval
+        _lastSolid = null;
         setHeader(window.scrollY);
     }
+
     function toggleMenu() {
         document.body.classList.contains('menu-open') ? closeMenu() : openMenu();
     }
 
-    // ===== SMOOTH SCROLL =====
     function bindSmoothScroll() {
         qsa('[data-scroll]').forEach(a => {
             a.addEventListener('click', (e) => {
@@ -96,21 +82,17 @@
                 if (!target) return;
                 e.preventDefault();
                 closeMenu();
-                // Read layout once outside RAF
                 const y = window.scrollY + target.getBoundingClientRect().top - (header ? header.offsetHeight : 0) - 12;
                 window.scrollTo({ top: y, behavior: 'smooth' });
             });
         });
     }
 
-    // ===== ACTIVE NAV LINKS =====
-    // Uses cached section tops, updated only on resize — zero getBCR during scroll
     function bindActiveLinks() {
         const navLinks = qsa('.nav a[data-scroll]');
         const targets = navLinks.map(a => qs(a.getAttribute('href'))).filter(Boolean);
         if (!navLinks.length || !targets.length) return;
 
-        // Cache of absolute top positions
         let cachedTops = [];
 
         function updateCache() {
@@ -126,7 +108,6 @@
             if (!cachedTops.length) return;
             const headerH = header ? header.offsetHeight : 0;
             const probeY = y + headerH + 24;
-
             let active = null;
             for (let i = cachedTops.length - 1; i >= 0; i--) {
                 if (probeY >= cachedTops[i].top) {
@@ -134,7 +115,6 @@
                     break;
                 }
             }
-
             navLinks.forEach(a => {
                 const isActive = active && a.getAttribute('href') === `#${active.id}`;
                 if (a.classList.contains('is-active') !== isActive) {
@@ -147,7 +127,6 @@
         setActiveByScroll(window.scrollY);
         addScrollTask(setActiveByScroll);
 
-        // Resize: debounced cache update
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
@@ -155,8 +134,6 @@
         }, { passive: true });
     }
 
-    // ===== PROGRESS BAR =====
-    // Uses transform:scaleX (compositor-only) instead of width — zero layout/paint cost
     function bindProgress() {
         if (!prog) return;
         const h = document.documentElement;
@@ -170,7 +147,6 @@
             }
             const max = h.scrollHeight - h.clientHeight;
             const raw = max > 0 ? y / max : 0;
-            // Round to 2 decimal places to reduce style writes
             const scale = Math.round(Math.max(0, Math.min(1, raw)) * 100) / 100;
             if (scale !== lastScale) {
                 prog.style.transform = `scaleX(${scale})`;
@@ -182,74 +158,6 @@
         addScrollTask(setProgress);
     }
 
-    // ===== HERO SLIDESHOW =====
-    // CSS handles crossfade; JS only toggles classes. No timers running when tab hidden.
-    function initHeroSlides() {
-        const slides = qsa('.heroSlides__img');
-        if (!slides.length) return;
-        let idx = 0;
-
-        const show = (nextIdx) => {
-            const current = qs('.heroSlides__img.is-active');
-            if (current === slides[nextIdx]) return;
-            if (current) {
-                current.classList.remove('is-active');
-                current.classList.add('is-leaving');
-                // Remove is-leaving after transition completes
-                setTimeout(() => current.classList.remove('is-leaving'), 1400);
-            }
-            slides[nextIdx].classList.add('is-active');
-        };
-
-        show(0);
-
-        // Use visibility API to pause when tab is hidden — saves GPU
-        let timer;
-        function startTimer() {
-            timer = setInterval(() => {
-                idx = (idx + 1) % slides.length;
-                show(idx);
-            }, 8000);
-        }
-        function stopTimer() { clearInterval(timer); }
-
-        document.addEventListener('visibilitychange', () => {
-            document.hidden ? stopTimer() : startTimer();
-        });
-
-        setTimeout(startTimer, 4000);
-    }
-
-    // ===== SPOTLIGHT BORDERS =====
-    // RAF-throttled, skipped on touch devices, only updates the hovered card
-    function initSpotlight() {
-        if (window.matchMedia('(pointer: coarse)').matches) return;
-        let pending = false;
-        let mx = 0, my = 0;
-        let lastCard = null;
-
-        document.addEventListener('mousemove', e => {
-            mx = e.clientX; my = e.clientY;
-            if (pending) return;
-            pending = true;
-            requestAnimationFrame(() => {
-                pending = false;
-                const card = document.elementFromPoint(mx, my)?.closest('.spotlight-card');
-                if (card !== lastCard) {
-                    if (lastCard) lastCard.style.setProperty('--opacity', '0');
-                    lastCard = card;
-                }
-                if (!card) return;
-                const rect = card.getBoundingClientRect();
-                card.style.setProperty('--x', `${mx - rect.left}px`);
-                card.style.setProperty('--y', `${my - rect.top}px`);
-                card.style.setProperty('--opacity', '1');
-            });
-        }, { passive: true });
-    }
-
-    // ===== FLOATING DOCK =====
-    // heroBottom cached, recalculated only on resize. Class toggle only.
     function initFabDock() {
         const dock = qs('.fabDock');
         const hero = qs('#hero');
@@ -286,15 +194,8 @@
         }, { passive: true });
     }
 
-    // ===== REVEAL + WIPE =====
-    // IntersectionObserver only, no scroll polling
-    function initMegaReveal() {
-        const wipeEls = qsa('[data-reveal="wipe"]');
-        wipeEls.forEach(el => {
-            if (el.querySelector('.wipeText')) return;
-            el.innerHTML = `<span class="wipeText">${el.innerHTML}</span>`;
-        });
-        const items = qsa('.reveal, [data-reveal]');
+    function initReveal() {
+        const items = qsa('[data-reveal]');
         if (!items.length) return;
 
         const groupKey = (el) => el.closest('.section, .heroStage, main') || document.body;
@@ -322,7 +223,52 @@
         items.forEach(el => io.observe(el));
     }
 
-    // ===== NAV COMIC LETTERS =====
+    function setYear() {
+        const y = qs('#year');
+        if (y) y.textContent = new Date().getFullYear();
+    }
+
+    function initCounters() {
+        const numbers = qsa('.pstep__n, .statItem__num');
+
+        const animate = (el) => {
+            const raw = el.textContent.trim();
+            const match = raw.match(/^(\D*)(\d+)(\D*)$/);
+            if (!match) return;
+            const [, prefix, numStr, suffix] = match;
+            const val = parseInt(numStr, 10);
+            if (!val) return;
+            const hasLeadingZero = numStr.length > 1 && numStr.startsWith('0');
+            const duration = 1400;
+            const startTime = performance.now();
+
+            const update = (now) => {
+                const elapsed = now - startTime;
+                const progress = Math.min(1, elapsed / duration);
+                const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                const current = Math.floor(ease * val);
+                let currentStr = current.toString();
+                if (hasLeadingZero && current < 10) currentStr = '0' + currentStr;
+                el.textContent = `${prefix}${currentStr}${suffix}`;
+                if (progress < 1) requestAnimationFrame(update);
+                else el.textContent = raw;
+            };
+
+            requestAnimationFrame(update);
+        };
+
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animate(entry.target);
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.4 });
+
+        numbers.forEach(el => obs.observe(el));
+    }
+
     function initNavComic() {
         const palette = ["#ffd400", "#ff3b3b", "#26e06f", "#3aa6ff", "#ff7a18", "#ffffff"];
         let isWrapping = false;
@@ -337,7 +283,7 @@
         }
         function textSeed(str) {
             let h = 0;
-            for (let i = 0; i < str.length; i++) { h = (h << 5) - h + str.charCodeAt(i); h |= 0; }
+            for (let i = 0; i < str.length; i++) { h = ((h << 5) - h) + str.charCodeAt(i); h |= 0; }
             return Math.abs(h);
         }
         function wrapElement(el) {
@@ -365,165 +311,42 @@
             finally { isWrapping = false; }
         }
 
-        // Debounced resize
-        let resizeTimer;
-        window.addEventListener("resize", () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(wrapAll, 80);
-        }, { passive: true });
-
         wrapAll();
         if (document.fonts?.ready) document.fonts.ready.then(wrapAll).catch(() => {});
     }
 
-    // ===== YEAR =====
-    function setYear() {
-        const y = qs('#year');
-        if (y) y.textContent = new Date().getFullYear();
-    }
+    function initScrollTop() {
+        const btn = qs('#scrollTop');
+        const ring = qs('.scrollTop__fg');
+        if (!btn) return;
+        const circ = 2 * Math.PI * 18;
+        if (ring) {
+            ring.style.strokeDasharray = String(circ);
+            ring.style.strokeDashoffset = String(circ);
+        }
 
-    // ===== COUNTER ANIMATION =====
-    // One IntersectionObserver, one RAF loop per element, no setInterval
-    function initSpeedometer() {
-        const numbers = [
-            ...qsa('.std3__pnum'),
-            ...qsa('.pstep__n'),
-            ...qsa('.svcItem__n'),
-            ...qsa('.statItem__num')
-        ];
-
-        const animate = (el) => {
-            const raw = el.textContent.trim();
-            // Support formats: "25k", "300+", "10g", "100%", "01", plain numbers
-            const match = raw.match(/^(\D*)(\d+)(\D*)$/);
-            if (!match) return;
-            const [, prefix, numStr, suffix] = match;
-            const val = parseInt(numStr, 10);
-            if (isNaN(val) || val === 0) return;
-            const hasLeadingZero = numStr.length > 1 && numStr.startsWith('0');
-            const duration = 1600;
-            const startTime = performance.now();
-
-            const update = (now) => {
-                const elapsed = now - startTime;
-                const progress = Math.min(1, elapsed / duration);
-                // Ease-out expo
-                const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-                const current = Math.floor(ease * val);
-                let currentStr = current.toString();
-                if (hasLeadingZero && current < 10) currentStr = '0' + currentStr;
-                el.textContent = `${prefix}${currentStr}${suffix}`;
-                if (progress < 1) requestAnimationFrame(update);
-                else el.textContent = raw; // snap to final value
-            };
-
-            requestAnimationFrame(update);
-        };
-
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animate(entry.target);
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.4 });
-
-        numbers.forEach(el => obs.observe(el));
-    }
-
-    // ===== PIT STOP RANDOMIZER =====
-    function initPitStop() {
-        const el = qs('.pitTime__val');
-        if (!el) return;
-        const rand = Math.floor(Math.random() * 11 + 20); // 20-30
-        el.innerHTML = `~${rand}<span class="pitTime__blink">:</span>00 MIN`;
-    }
-
-    // ===== DATA DECODE REVEAL =====
-    // Replaced setInterval with requestAnimationFrame for smoother animation
-    // and zero timer drift
-    function initDataDecode() {
-        const items = qsa('[data-decode]');
-        if (!items.length) return;
-
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&';
-
-        const decode = (el) => {
-            const original = el.innerText;
-            const len = original.length;
-            const isHero = el.dataset.decode === 'hero';
-            const speed = isHero ? 0.8 : 0.5;
-            el.style.opacity = '1';
-
-            let iterations = 0;
-            let startTime = null;
-
-            const tick = (now) => {
-                if (!startTime) startTime = now;
-                // ~30ms per frame equivalent via time
-                const elapsed = now - startTime;
-                iterations = (elapsed / 30) * speed;
-
-                el.innerText = original.split('').map((char, index) => {
-                    if (index < iterations) return original[index];
-                    if (char === ' ') return ' ';
-                    return chars[Math.floor(Math.random() * chars.length)];
-                }).join('');
-
-                if (iterations < len) {
-                    requestAnimationFrame(tick);
-                } else {
-                    el.innerText = original;
-                }
-            };
-
-            requestAnimationFrame(tick);
-        };
-
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    decode(entry.target);
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        items.forEach(el => {
-            const isHero = el.dataset.decode === 'hero';
-            if (isHero) {
-                setTimeout(() => decode(el), 300 + (items.indexOf(el) * 100));
-            } else {
-                el.style.opacity = '0';
-                obs.observe(el);
+        let lastVisible = null;
+        let lastEnd = null;
+        function update(y) {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
+            if (ring) ring.style.strokeDashoffset = String(circ * (1 - p));
+            const vis = y > 280;
+            if (vis !== lastVisible) {
+                btn.classList.toggle('is-visible', vis);
+                lastVisible = vis;
             }
-        });
+            const atEnd = p >= 0.985;
+            if (atEnd !== lastEnd) {
+                btn.classList.toggle('is-end', atEnd);
+                lastEnd = atEnd;
+            }
+        }
+
+        update(window.scrollY);
+        addScrollTask(update);
     }
 
-    // ===== TECHNICAL BREAKDOWN =====
-    function initTechnicalBreakdown() {
-        const breakdown = qs('.breakdown');
-        if (!breakdown) return;
-        const highlights = qsa('.breakdown__highlight');
-        const steps = qsa('.breakdown__step');
-        if (!highlights.length || !steps.length) return;
-
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    const stepIndex = steps.indexOf(entry.target);
-                    highlights.forEach((h, i) => {
-                        h.classList.toggle('is-active', i === stepIndex);
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
-
-        steps.forEach(step => obs.observe(step));
-    }
-
-    // ===== FAQ ACCORDION =====
     function initFAQ() {
         const triggers = qsa('.faqItem__trigger');
         if (!triggers.length) return;
@@ -533,7 +356,6 @@
                 const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
                 const item = trigger.closest('.faqItem');
 
-                // Close all others
                 triggers.forEach(t => {
                     if (t !== trigger) {
                         t.setAttribute('aria-expanded', 'false');
@@ -548,17 +370,13 @@
         });
     }
 
-    // ===== BOOT =====
     function initApp() {
-        // 1. Sync topbar height BEFORE anything else — fixes hero spacing
         syncTopbarH();
 
-        // 2. Use ResizeObserver on header for accurate real-time height tracking
-        if (window.ResizeObserver) {
+        if (window.ResizeObserver && header) {
             const ro = new ResizeObserver(() => syncTopbarH());
             ro.observe(header);
         } else {
-            // Fallback: debounced resize
             let resizeTimer;
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimer);
@@ -566,15 +384,11 @@
             }, { passive: true });
         }
 
-        // 3. Initial header state
         setHeader(window.scrollY);
-
-        // 4. Register scroll tasks
         addScrollTask(setHeader);
         bindProgress();
         bindActiveLinks();
 
-        // 5. Menu
         if (navbtn && mnav) navbtn.addEventListener('click', toggleMenu);
         overlay?.addEventListener('click', closeMenu);
         mnav?.addEventListener('click', (e) => { if (e.target === mnav) closeMenu(); });
@@ -584,45 +398,28 @@
 
         bindSmoothScroll();
         setYear();
-
-        // 6. Critical above-fold
-        initHeroSlides();
         initFabDock();
-        initPitStop();
+        initScrollTop();
+        initNavComic();
+        initReveal();
+        initFAQ();
 
-        // 7. Non-critical — deferred to idle time
         const defer = () => {
-            const run = () => {
-                initNavComic();
-                initMegaReveal();
-                initSpotlight();
-                initSpeedometer();
-                initDataDecode();
-                initTechnicalBreakdown();
-                initFAQ();
-            };
-
-            if (window.requestIdleCallback) {
-                requestIdleCallback(run, { timeout: 1500 });
-            } else {
-                setTimeout(run, 80);
-            }
+            const run = () => initCounters();
+            if (window.requestIdleCallback) requestIdleCallback(run, { timeout: 1500 });
+            else setTimeout(run, 80);
         };
 
         if (document.readyState === 'complete') defer();
         else window.addEventListener('load', defer, { once: true });
 
-        // Mark ready — enables CSS transitions (prevents FOUC)
         setTimeout(() => document.body.classList.add('is-ready'), 50);
 
-        // Navigation Button Logic
-        const navBtns = document.querySelectorAll('.js-navigate-btn');
-        navBtns.forEach(btn => {
+        qsa('.js-navigate-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const address = "VR46 DOO, Patrijarha Joanikija 3a, Beograd";
                 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-                
                 if (isIOS) {
                     window.location.href = `maps://?daddr=${encodeURIComponent(address)}`;
                 } else {
